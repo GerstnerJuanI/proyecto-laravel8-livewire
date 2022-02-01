@@ -23,7 +23,7 @@ class ShowPosts extends Component
     public $sort = 'id';
     public $direction = 'desc';
     
-    protected $listeners = ['render' => 'render'];//se puede ['render'] // variable que escucha el evento de CreatePost.
+    protected $listeners =['render'] ;//se puede  ['render' => 'render']// variable que escucha el evento de CreatePost.
 
 
     public function render()

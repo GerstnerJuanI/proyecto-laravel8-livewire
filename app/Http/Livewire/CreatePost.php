@@ -11,12 +11,16 @@ class CreatePost extends Component
     public $title, $content; // info inputs
 
     protected $rules = [  //reglas de validacion
-        'titles' => 'required|max:100',
-        'content' => 'required|max:100',
+        'title' => 'required|max:100',
+        'content' => 'required|min:100',
     ];
 
-    public function save()
+    public function updated($propertyName)
     {
+        $this->validateOnly($propertyName);
+    }
+
+    public function save(){
 
         $this->validate();
 

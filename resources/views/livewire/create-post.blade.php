@@ -12,14 +12,19 @@
             <div class="mb-4">
                 <x-jet-label value="Titulo del post">
                 </x-jet-label>
-                <x-jet-input type="text" class="w-full" wire:model.defer="title"></x-jet-input>
-                
+                <x-jet-input type="text" class="w-full" wire:model="title"></x-jet-input>
+                <!-- mensaje de error -->
+                <x-jet-input-error for="title"></x-jet-input-error>
+
+
             </div>
             <div class="mb-4">
                 <x-jet-label value="contenido del post">
                 </x-jet-label>
                 <textarea class="w-full form-control" rows="6" wire:model.defer="content"></textarea>
-                
+                <!-- mensaje de error  -->
+                <x-jet-input-error for="content"></x-jet-input-error>
+
             </div>
         </x-slot>
         <x-slot name="footer">
