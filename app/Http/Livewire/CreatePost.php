@@ -10,7 +10,7 @@ class CreatePost extends Component
 {
     use WithFileUploads;
 
-    public $open = true; // ventana abierta o cerrada.
+    public $open = false; // ventana abierta o cerrada.
     public $title, $content, $image, $identificador; // info inputs
 
     public function mount()
