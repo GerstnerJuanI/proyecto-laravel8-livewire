@@ -19,110 +19,175 @@
             </div>
             @if ($posts->count())
 
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th 
-                                class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                wire:click="order('id')" 
-                                scope="col">
-                                ID
-                                {{-- Sort --}}
-                                @if ($sort == 'id')
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            wire:click="order('id')" scope="col">
+                            ID
+                            {{-- Sort --}}
+                            @if ($sort == 'id')
 
-                                    @if ($direction == 'asc')
-                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                            @if ($direction == 'asc')
+                            <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
 
-                                    @else
-                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                            @else
+                            <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
 
-                                    @endif
+                            @endif
 
-                                @else
-                                    <i class="fas fa-sort float-right mt-1"></i>
+                            @else
+                            <i class="fas fa-sort float-right mt-1"></i>
 
-                                @endif
-                            </th>
-                            <th wire:click="order('title')" scope="col"
-                                class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Title
-                                {{-- Sort --}}
-                                @if ($sort == 'title')
+                            @endif
+                        </th>
+                        <th wire:click="order('title')" scope="col"
+                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Title
+                            {{-- Sort --}}
+                            @if ($sort == 'title')
 
-                                    @if ($direction == 'asc')
-                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                            @if ($direction == 'asc')
+                            <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
 
-                                    @else
-                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                            @else
+                            <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
 
-                                    @endif
+                            @endif
 
-                                @else
-                                    <i class="fas fa-sort float-right mt-1"></i>
+                            @else
+                            <i class="fas fa-sort float-right mt-1"></i>
 
-                                @endif
-                            </th>
-                            <th wire:click="order('content')" scope="col"
-                                class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Content
-                                {{-- Sort --}}
-                                @if ($sort == 'content')
+                            @endif
+                        </th>
+                        <th wire:click="order('content')" scope="col"
+                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Content
+                            {{-- Sort --}}
+                            @if ($sort == 'content')
 
-                                    @if ($direction == 'asc')
-                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                            @if ($direction == 'asc')
+                            <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
 
-                                    @else
-                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                            @else
+                            <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
 
-                                    @endif
+                            @endif
 
-                                @else
-                                    <i class="fas fa-sort float-right mt-1"></i>
+                            @else
+                            <i class="fas fa-sort float-right mt-1"></i>
 
-                                @endif
-                            </th>
+                            @endif
+                        </th>
 
-                            <th scope="col" class="relative px-6 py-3">
-                                <span class="sr-only">Edit</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($posts as $post)
-                            <tr>
-                                <td class="px-6 py-4 ">
-                                    <div class="text-sm text-gray-900">
-                                        {{ $post->id }}</div>
-                                </td>
-                                <td class="px-6 py-4 ">
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        {{ $post->title }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 ">
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        {{ $post->content }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 text-sm font-medium">
-                                    @livewire('edit-post', ['post'=>$post], key($post->id))
-                                </td>
-                            </tr>
-                        @endforeach
-                        <!-- More people... -->
-                    </tbody>
-                </table>
+                        <th scope="col" class="relative px-6 py-3">
+                            <span class="sr-only">Edit</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($posts as $item)
+                    <tr>
+                        <td class="px-6 py-4 ">
+                            <div class="text-sm text-gray-900">
+                                {{ $item->id }}</div>
+                        </td>
+                        <td class="px-6 py-4 ">
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                {{ $item->title }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 ">
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                {{ $item->content }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm font-medium">
+                            {{-- @livewire('edit-post', ['post'=>$post], key($post->id)) // solo fue para explicar los
+                            componentes de alineamiento --}}
+                            <a class="btn btn-green" wire:click="edit({{$item}})">
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                    @endforeach
+                    <!-- More people... -->
+                </tbody>
+            </table>
 
             @else
-                <div class="px-6 py-4">
-                    <h3>Sin registros.</h3>
-                </div>
+            <div class="px-6 py-4">
+                <h3>Sin registros.</h3>
+            </div>
             @endif
+
+            @if ($posts->hasPAges())
+            <div class="px-6 py-3">
+                {{$posts->links()}}
+            </div>
+            @endif
+
         </x-table>
 
     </div>
+
+    <x-jet-dialog-modal wire:model="open_edit">
+
+        <x-slot name='title'>
+            Editar el post
+        </x-slot>
+
+        <x-slot name='content'>
+
+
+            <div wire:loading wire:target="image"
+                class="w-full mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                role="alert">
+                <strong class="font-bold">Cargando imagen...</strong>
+                <span class="block sm:inline">Espere por favor. :)</span>
+            </div>
+
+            @if ($image)
+            <img class="mb-4" src="{{$image->temporaryUrl()}}">
+            @else
+            <img src="{{ asset('storage/'.$post->image.'') }}" alt="">
+            {{-- <img src="{{Storage::url($post->image)}}" alt=""> --}}
+
+            @endif
+
+
+
+            <div class="mb-4">
+                <x-jet-label value="Titulo del post"></x-jet-label>
+                <x-jet-input wire:model="post.title" type="text" class="w-full"></x-jet-input>
+            </div>
+            <div class="mb-4">
+                <x-jet-label value="Contenido del post"></x-jet-label>
+                <textarea wire:model='post.content' rows="10" class="form-control w-full"></textarea>
+            </div>
+            <div>
+                <input type="file" wire:model="image" id="{{$identificador}}">
+                <x-jet-input-error for="image"></x-jet-input-error>
+            </div>
+        </x-slot>
+
+        <x-slot name='footer'>
+            <x-jet-secondary-button wire:click="$set('open_edit',false)">
+                Cancelar
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button wire:click="update" wire:loading.attr="disabled" class="disabled:opacity-25">
+                Actualizar
+            </x-jet-danger-button>
+        </x-slot>
+
+
+    </x-jet-dialog-modal>
+
+
     {{-- <h1>hola mundo, {{$name}} </h1> --}}
     {{-- <h1>hola, {{$titulo}}</h1> --}}
 </div>
