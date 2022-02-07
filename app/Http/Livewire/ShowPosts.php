@@ -33,6 +33,9 @@ class ShowPosts extends Component
 
     public $open_edit = false;
     
+    protected $listeners =['render', 'delete'] ;//se puede  ['render' => 'render']// variable que escucha el evento de CreatePost.
+
+
     protected $queryString =[
         'cant'=> ['except' => '10'],
         'sort'=> ['except' => 'id'],
@@ -51,7 +54,6 @@ class ShowPosts extends Component
         'post.content' => 'required',
     ];
     
-    protected $listeners =['render'] ;//se puede  ['render' => 'render']// variable que escucha el evento de CreatePost.
 
 
     public function render()
@@ -126,5 +128,9 @@ class ShowPosts extends Component
     public function loadPosts()
     {
         $this->readyToLoad =true;
+    }
+    public function delete(Post $post)
+    {
+        $post->delete();
     }
 }

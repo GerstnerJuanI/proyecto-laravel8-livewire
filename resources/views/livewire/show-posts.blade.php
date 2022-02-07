@@ -116,13 +116,16 @@
                                 {{ $item->content }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm font-medium">
+                        <td class="px-6 py-4 text-sm font-medium flex">
                             {{-- @livewire('edit-post', ['post'=>$post], key($post->id)) // solo fue para explicar los
                             componentes de alineamiento --}}
                             <a class="btn btn-green" wire:click="edit({{$item}})">
-                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-edit "></i>
                             </a>
 
+                            <a class="btn btn-red ml-2" wire:click="$emit('deletePost',{{$item->id}})">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -207,6 +210,37 @@
 
     </x-jet-dialog-modal>
 
+    @push('js')
+    <script src="sweetalert2.all.min.js"></script>
+    <script>
+        livewire.on('deletePost', postId =>{
+            
+        Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+
+    if (result.isConfirmed) {
+
+        livewire.emitTo('show-posts', 'delete', postId);
+
+
+        Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+        )
+    }
+    })
+        })
+    </script>
+
+    @endpush
 
     {{-- <h1>hola mundo, {{$name}} </h1> --}}
     {{-- <h1>hola, {{$titulo}}</h1> --}}
