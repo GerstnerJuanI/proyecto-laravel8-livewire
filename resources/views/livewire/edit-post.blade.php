@@ -20,8 +20,10 @@
             @if ($image)
                 <img class="mb-4" src="{{$image->temporaryUrl()}}">
             @else 
+        
                 <img src="{{ asset('storage/'.$post->image.'') }}" alt="">
             @endif
+            
             
             
 

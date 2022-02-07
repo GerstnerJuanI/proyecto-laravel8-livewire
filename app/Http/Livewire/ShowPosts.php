@@ -24,12 +24,22 @@ class ShowPosts extends Component
     //     $this->name = $name;
     // }
         
-    public $search, $post, $image, $identificador;
+    public $post, $image, $identificador;
+    public $search ='';
     public $sort = 'id';
     public $direction = 'desc';
+    public $cant ='10';
+    public $readyToLoad = false;
 
     public $open_edit = false;
     
+    protected $queryString =[
+        'cant'=> ['except' => '10'],
+        'sort'=> ['except' => 'id'],
+        'direction'=> ['except' => 'desc'],
+        'search'=> ['except' => '']
+    ];
+
     public function mount()
     {
         $this->identificador = rand();
@@ -46,10 +56,22 @@ class ShowPosts extends Component
 
     public function render()
     {
-        $posts = Post::where('title','like','%' . $this->search . '%')
+
+        if ($this->readyToLoad) {
+            $posts = Post::where('title','like','%' . $this->search . '%')
             ->orWhere('content','like','%' . $this->search . '%')
             ->orderBy($this->sort,$this->direction)
-            ->paginate(10);
+            ->paginate($this->cant);
+
+        }else{
+            $posts = [];
+        }
+
+        // $posts = Post::where('title','like','%' . $this->search . '%')
+        //     ->orWhere('content','like','%' . $this->search . '%')
+        //     ->orderBy($this->sort,$this->direction)
+        //     ->paginate($this->cant);
+
         //$posts = Post::all();
 
         return view('livewire.show-posts', compact('posts'));
@@ -100,5 +122,9 @@ class ShowPosts extends Component
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+    public function loadPosts()
+    {
+        $this->readyToLoad =true;
     }
 }

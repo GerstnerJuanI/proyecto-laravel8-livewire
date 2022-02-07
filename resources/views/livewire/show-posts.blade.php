@@ -1,4 +1,4 @@
-<div>
+<div wire:init='loadPosts'>
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -11,13 +11,25 @@
         <!-- This example requires Tailwind CSS v2.0+ -->
         <x-table> {{-- componente tabla --}}
             <div class="px-6 py-4 flex items-center">
+
+                <div class="flex items-center">
+                    <span>Mostrar:</span>
+                    <select wire:model="cant" class="mr-2 form-control">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span>entradas</span>
+                </div>
+
                 {{-- <input type="text" wire:model="search"> --}}
-                <x-jet-input class="flex-1 mr-4" placeholder="buscar..." type="text" wire:model="search" />
+                <x-jet-input class="flex-1 ml-4 mr-4" placeholder="buscar..." type="text" wire:model="search" />
                 {{-- //donde ponemos -jet- para que busque dentro de la carpeta de jetstream --}}
 
                 @livewire('create-post')
             </div>
-            @if ($posts->count())
+            @if (count($posts))
 
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
@@ -117,18 +129,26 @@
                     <!-- More people... -->
                 </tbody>
             </table>
-
-            @else
-            <div class="px-6 py-4">
-                <h3>Sin registros.</h3>
-            </div>
-            @endif
-
-            @if ($posts->hasPAges())
+            @if ($posts->hasPages())
             <div class="px-6 py-3">
                 {{$posts->links()}}
             </div>
             @endif
+
+            @else
+
+            <div class=" px-6 py-3 relative flex justify-center items-center">
+                <div class="bg-gray-500  animate-spin ease rounded duration-300 w-12 h-12 border-1 border-gray">
+                    <img src="http://127.0.0.1:8000/storage/posts/doge.webp" alt="">
+                </div>
+            </div>
+            <div class="px-6 py-3 relative flex justify-center items-center">
+                <div class="px-6 py-3 rounded border-2 border-white">Sin Registros.</div>
+            </div>
+
+
+            @endif
+
 
         </x-table>
 
